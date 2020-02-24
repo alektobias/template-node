@@ -12,10 +12,10 @@ import redis from 'redis';
 import Youch from 'youch';
 
 import Queue from './app/lib/Queue';
+import redisConfig from './config/redis';
 import routes from './routes';
 
 import 'express-async-errors';
-import redisConfig from './config/redis';
 import './database';
 
 class App {
