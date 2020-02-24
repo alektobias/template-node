@@ -1,6 +1,10 @@
 import 'dotenv/config';
 
 import express from 'express';
+
+import cors from 'cors';
+import helmet from 'helmet';
+import morgan from 'morgan';
 import Youch from 'youch';
 import 'express-async-errors';
 
@@ -17,6 +21,9 @@ class App {
 
 	middlewares() {
 		this.server.use(express.json());
+		this.server.use(morgan('dev'));
+		this.server.use(helmet());
+		this.server.use(cors());
 	}
 
 	routes() {

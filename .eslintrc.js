@@ -27,6 +27,7 @@ module.exports = {
 			{
 					"newlinesBetween": "always", // new line between groups
 					"groups": [
+							"/^express*/",
 							"module",
 							"/^~/",
 							["parent", "sibling", "index"],
