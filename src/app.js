@@ -1,10 +1,14 @@
 import 'dotenv/config';
 
+import BullBoard from 'bull-board';
 import express from 'express';
 import Youch from 'youch';
+
+import Queue from './app/lib/Queue';
+import routes from './routes';
+
 import 'express-async-errors';
 
-import routes from './routes';
 import './database';
 
 class App {
@@ -18,6 +22,9 @@ class App {
 
 	middlewares() {
 		this.server.use(express.json());
+
+		BullBoard.setQueues(Queue.queues.map(queue => queue.bull));
+		this.server.use('/queue', BullBoard.UI);
 	}
 
 	routes() {
