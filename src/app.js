@@ -23,7 +23,7 @@ class App {
 		this.server.use(express.json());
 		this.server.use(morgan('dev'));
 		this.server.use(helmet());
-		this.server.use(cors());
+		this.server.use(cors({ origin: process.env.ORIGIN }));
 	}
 
 	routes() {
