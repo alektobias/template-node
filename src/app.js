@@ -2,13 +2,17 @@ import 'dotenv/config';
 
 import express from 'express';
 
+import BullBoard from 'bull-board';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import Youch from 'youch';
+
+import Queue from './app/lib/Queue';
+import routes from './routes';
+
 import 'express-async-errors';
 
-import routes from './routes';
 import './database';
 
 class App {
@@ -25,6 +29,9 @@ class App {
 		this.server.use(morgan('dev'));
 		this.server.use(helmet());
 		this.server.use(cors({ origin: process.env.ORIGIN }));
+
+		BullBoard.setQueues(Queue.queues.map(queue => queue.bull));
+		this.server.use('/queue', BullBoard.UI);
 	}
 
 	routes() {
